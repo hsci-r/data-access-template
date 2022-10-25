@@ -1,3 +1,5 @@
+db_secret.yaml
+.DS_Store
 .Rproj.user
 .Rhistory
 .RData

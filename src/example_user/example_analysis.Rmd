@@ -6,7 +6,6 @@ output:
     variant: gfm 
     toc: yes
   html_notebook:
-    code_folding: hide
     toc: yes
 ---
 
@@ -16,9 +15,9 @@ Naturally, if more refined organisation of common code is needed, one is also fr
 
 The central object defined in `common_basis.R` is `con`, which is the [MariaDB](https://mariadb.com/) (MySQL) database connection (a [DBI](https://dbi.r-dbi.org/) connection) through which both ready data is accessed, as well as new data stored for others to reuse. Below, you will see both how to use con to store data in the database, as well as how query it.
 
-The details of the database connection are stored in [`db_params.yaml`](/db_params.yaml). The password is given separately. **DO NOT INCLUDE THE PASSWORD IN ANY CODE YOU COMMIT TO GITHUB**. If running this notebook, it will ask for the password the first time you run it, and then store it separately in your keyring.
+The details of the database connection are stored in [`db_params.yaml`](/db_params.yaml). The password is given separately. **DO NOT INCLUDE THE PASSWORD IN ANY CODE YOU COMMIT TO GITHUB**. If running this notebook, it will ask for the password the first time you run it, and then store it separately in your keyring. This requires a working keyring implementation on your system. Consult the [`keyring`](https://r-lib.github.io/keyring/index.html) package documentation if you have problems. If you cannot get it to work, a second option is to create a `db_secret.yaml` file in the project root directory with `db_pass: [PASSWORD]` as the content. This file is already set to be ignored by Git so it wouldn't accidentally get included in a commit, but still, if you do this, **DON'T MAKE THE MISTAKE OF COMMITTING THE FILE TO GITHUB**.
 
-```{r setup, include=FALSE}
+```{r setup}
 source(here::here("src/common_basis.R"), local = knitr::knit_global())
 ```
 

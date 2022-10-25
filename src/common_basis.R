@@ -15,7 +15,7 @@ get_connection <- function() {
       host = db_params$db_host,
       dbname = db_params$db_name,
       user = db_params$db_user,
-      password = if (Sys.getenv("DB_PASS")!="") Sys.getenv("DB_PASS") else key_get(db_params$db_name,"DB_PASS"),
+      password = if (file.exists(here("db_secret.yaml"))) read_yaml(here("db_secret.yaml"))$db_pass else key_get(db_params$db_name,"DB_PASS"),
       bigint = "integer",
       load_data_local_infile = TRUE,
       autocommit = TRUE,

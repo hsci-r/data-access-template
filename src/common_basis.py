@@ -1,11 +1,10 @@
 import keyring
 import getpass
 import sqlalchemy
-import os
 import yaml
 from hereutil import here
 from sqlalchemy import text
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.exc import SQLAlchemyError, ArgumentError
 from sqlalchemy.future import Engine, Connection
 
 
@@ -15,12 +14,15 @@ def get_connection() -> (Engine, Connection):
     while con is None:
         with here("db_params.yaml").open('r') as f:
             db_params = yaml.safe_load(f)
-        password = os.environ.get("DB_PASS")
-        if password is None:
+        if here("db_secret.yaml", warn=False).exists():
+            password = yaml.safe_load(here("db_secret.yaml").open('r'))['db_pass']
+        else:
             try:
                 password = keyring.get_password(db_params['db_name'], "DB_PASS")
             except keyring.errors.NoKeyringError:
                 pass
+        if password is None:
+            password = ""
         try:
             eng = sqlalchemy.create_engine(
                 "mariadb+pymysql://" + db_params['db_user'] + ":" + password + "@" + db_params['db_host'] + "/" +
