@@ -1,25 +1,20 @@
-[tool.poetry]
+[project]
 name = "data-access-template"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
-
-[tool.poetry.dependencies]
-python = "^3.8,<3.12"
-pandas = "^1.4.4"
-seaborn = "^0.11.2"
-PyMySQL = "^1.0.2"
-hereutil = "^0.1.0"
-keyring = "^23.9.1"
-jupytext = "^1.14.1"
-jupyterlab = "^3.4.5"
-SQLAlchemy = "^1.4.40"
-datar = {extras = ["pdtypes"], version = "^0.8.6"}
-plotnine = "^0.9.0"
-google-api-python-client = "^2.61.0"
-
-[tool.poetry.dev-dependencies]
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+authors = [
+    {name = "Your Name", email = "you@example.com"},
+]
+requires-python = ">=3.10,<4.0"
+dependencies = [
+    "pandas>=2.2.3",
+    "seaborn>=0.13.2",
+    "PyMySQL>=1.1.1",
+    "hereutil>=0.1.5",
+    "keyring>=25.5.0",
+    "jupytext>=1.16.4",
+    "jupyterlab>=4.3.1",
+    "SQLAlchemy>=2.0.36",
+    "plotnine>=0.14.1",
+    "google-api-python-client>=2.153.0",
+]
